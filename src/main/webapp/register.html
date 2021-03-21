@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <script src="/js/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h2>用户注册</h2>
+    <form action="/adduser" method="post">
+        <table>
+            <tr>
+                <td>姓名：</td>
+                <td><input type="text" name="username" v-model="username"></td>
+            </tr>
+            <tr>
+                <td>密码：</td>
+                <td><input type="password" name="password" v-model="password"></td>
+            </tr>
+            <tr>
+                <td>确认密码：</td>
+                <td><input type="password" name="confirm_password" @change="confirm_password" v-model="confirmPassword">
+                </td>
+            </tr>
+            <tr style="height: 20px">
+                <td></td><td><div style="color: red;font-size: 10px" id="" v-show="show">{{confirm_password_alert}}</div></td>
+            </tr>
+            <tr><td><input type="submit" value="提交"></td></tr>
+        </table>
+    </form>
+</div>
+<script>
+    const app = new Vue({
+        el: "#app",
+        data: {
+            test: "hello",
+            username: "",
+            password: "",
+            confirmPassword: "",
+            show: false,
+            confirm_password_alert: "两次密码不同，请重新输入"
+        },
+        methods: {
+            confirm_password: function () {
+                console.log("confirm password:", this.password, this.confirmPassword)
+                if (this.password == this.confirmPassword) {
+                    this.show = false
+                    console.log(this.show)
+                } else {
+                    this.show = true
+                    console.log(this.show)
+                }//判断两次输入的密码是否相同
+            }
+        }
+    })
+</script>
+</body>
+</html>
